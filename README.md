@@ -1,28 +1,10 @@
-
-### IntelliJ / Eclipse:
-- Botão direito em `src/test/java` → **Run Tests**  
-- Execute individualmente se desejar
-
----
-
-# 📚 Tecnologias utilizadas
-
-| Tecnologia | Função |
-|-----------|--------|
-| **Java 7/8** | Linguagem utilizada |
-| **JUnit 4 / 5** | Framework de testes |
-| **Maven** | Gerenciamento de build |
-| **Mockito (quando aplicável)** | Mocks e isolamento |
-
----
-
 # 🏛️ Documentação das Principais Classes do Projeto
 
-A seguir, uma visão geral das classes principais do domínio e seu propósito dentro das regras de negócio usadas nos testes.
+Abaixo estão listadas apenas as classes que realmente fazem parte do projeto, conforme a estrutura atual do repositório.
 
 ---
 
-## 🟦 **Classe Filme**
+## 🟦 Classe Filme
 
 **Pacote:** `br.ce.wcaquino.entidades`
 
@@ -35,36 +17,40 @@ Representa um filme disponível para locação.
 - `Double precoLocacao`
 
 ### Responsabilidade:
-Garantir que o filme tenha dados válidos antes de ser locado.
+Manter informações essenciais sobre um filme a ser locado.
 
-### Exemplos de validação:
-✔ Estoque deve ser maior que zero  
-✔ Preço não pode ser negativo  
+Os testes garantem:
+✔ Estoque válido  
+✔ Preço definido  
+✔ Integridade dos dados da entidade  
 
 ---
 
-## 🟦 **Classe Usuario**
+## 🟦 Classe Usuario
 
 **Pacote:** `br.ce.wcaquino.entidades`
 
 ### Função:
-Representa o cliente que realizará a locação.
+Representa o usuário que realiza a locação.
 
-### Atributos principais:
+### Atributos:
 - `String nome`
 
 ### Responsabilidade:
-Ser a entidade mínima para validar regras da locação.  
-Os testes garantem que o usuário seja criado e comparado corretamente.
+Servir como entidade básica para identificar quem está realizando uma locação.
+
+Testes garantem:
+✔ Criação correta  
+✔ Comparação e integridade  
 
 ---
 
-## 🟦 **Classe Locacao**
+## 🟦 Classe Locacao
 
 **Pacote:** `br.ce.wcaquino.entidades`
 
 ### Função:
-Representa o ato da locação realizada.
+Representa o ato da locação.
 
 ### Atributos principais:
 - `Usuario usuario`
@@ -74,77 +60,61 @@ Representa o ato da locação realizada.
 - `Double valor`
 
 ### Responsabilidade:
-Área central da regra de negócio, registrando:
-- quais filmes foram locados  
-- quando a locação ocorreu  
-- quando será a devolução  
-- qual o valor total  
+Registrar e armazenar tudo o que envolve o processo de locação.
 
 ---
 
-## 🟦 **Classe LocacaoService**
+## 🟦 Classe LocacaoService
 
 **Pacote:** `br.ce.wcaquino.servicos`
 
 ### Função:
-**Coração das regras de negócio do projeto.**
+**Classe principal de regras de negócio do projeto.**
 
 ### Responsabilidades:
-- Validar entrada (filmes, usuário, estoque)  
-- Calcular preço total  
-- Aplicar descontos progressivos  
-- Ajustar data de devolução com base no dia da semana  
-- Criar o objeto Locacao  
-- Tratar exceções específicas  
+- Validar usuário e filmes  
+- Verificar estoque  
+- Calcular o valor total  
+- Criar a locação  
+- Definir a data de devolução  
+- Aplicar regras específicas conforme os testes  
 
-### Motivos para ser a classe mais testada:
-- Contém regras complexas  
-- Manipula datas  
-- Pode lançar diversas exceções  
-- Depende de serviços auxiliares (ex: calendário)  
+Essa é a classe com maior cobertura de testes no projeto.
+
+Os testes validam:
+✔ Locação simples  
+✔ Exceções (filme sem estoque, usuário nulo, filme nulo)  
+✔ Descontos progressivos  
+✔ Cálculo de valor  
+✔ Datas de locação e devolução  
 
 ---
 
-## 🟦 **Classe SPCService (quando utilizada)**
+## 🟦 Classe Calculadora
+
+**Pacote:** `br.ce.wcaquino.servicos`
 
 ### Função:
-Simular uma consulta externa de restrição financeira.
+Realizar operações matemáticas simples.
 
-### Responsabilidade:
-Retornar se o usuário está negativado ou não.
+### Métodos principais:
+- `somar(int a, int b)`
+- `subtrair(int a, int b)`
 
 ### Importância nos testes:
-- Depende de mock, pois é um serviço externo  
-- Afeta o fluxo da locação (usuário negativado não pode alugar)
+Serve como base para testes introdutórios usando JUnit.
 
 ---
 
-## 🟦 **Class LocacaoDAO / DAOFake**
+## 🟦 Classe AssertTest
+
+**Pacote:** `br.ce.wcaquino.servicos`
 
 ### Função:
-Simular operações de persistência.
+Demonstra exemplos práticos de uso de asserts do JUnit.
 
-### Responsabilidade:
-Salvar informações da locação.
-
-### Importância nos testes:
-- Evitar dependência com banco de dados real  
-- Demonstrar testes com stubs/mocks  
-
----
-
-# 🏁 Conclusão
-
-Este repositório é um estudo completo sobre **testes unitários em Java**, aplicando:
-
-- Regras de negócio reais  
-- Exceções  
-- Datas  
-- Descontos  
-- Testes parametrizados  
-- Mocks  
-- Boas práticas de organização  
-
-Serve como excelente base para quem deseja aprender qualidade de software, TDD e testes automatizados no ecossistema Java.
-
----
+Abrange:
+- Comparações numéricas  
+- Comparações de objetos  
+- Testes de igualdade  
+- Testes de condições booleanas  
