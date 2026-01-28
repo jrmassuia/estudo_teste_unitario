@@ -1,6 +1,5 @@
 package br.ce.wcaquino.servicos;
 
-import br.ce.wcaquino.entidades.Calculadora;
 import br.ce.wcaquino.exceptions.NaoPodeDividirPorZeroException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -62,6 +61,15 @@ public class CalculadoraTest {
         int b = 0;
         Calculadora calc = new Calculadora();
         calc.dividir(a, b);
+    }
+
+    @Test
+    public void deveDividir() {
+        String a = "6";
+        String b = "3";
+
+        int resultado = calc.divide(a, b);
+        Assert.assertEquals(2, resultado);
     }
 
 }
