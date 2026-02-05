@@ -47,6 +47,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
                 <configuration>
+                    <includes>
+                        <include>br/ce/wcaquino/**/*.java</include>
+                    </includes>
                     <threadCount>2</threadCount>
                     <parallel>classes</parallel>
                 </configuration>
